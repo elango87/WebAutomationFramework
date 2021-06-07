@@ -20,9 +20,11 @@ public final class WAFConstants {
     }
 
     public static String getExtentReportFilePath() {
+        // Replacing : with _ as jenkins doesn't accept :
+        String randomFileName = LocalTime.now().toString().replaceAll(":", "_");
         if (null == extentReportFilePath) {
             extentReportFilePath = EXTENT_REPORTS_DIRECTORY + LocalDate.now() +
-                    "/Report_" + LocalTime.now() + ".html";
+                    "/Report_" + randomFileName + ".html";
         }
         return extentReportFilePath;
     }
