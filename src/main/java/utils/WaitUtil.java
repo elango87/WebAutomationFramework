@@ -1,7 +1,7 @@
 package utils;
 
 import driver.ThreadLocalDriver;
-import enums.Config;
+import enums.ConfigProperties;
 import enums.WaitStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,9 +14,9 @@ public final class WaitUtil {
     }
 
     public static WebElement waitFor(By by, WaitStrategy waitStrategy) {
-        var waitTimeOut = Integer.parseInt(PropertyUtil.getConfig(Config.ELEMENT_LOAD_TIMEOUT));
+        var waitTimeOut = Integer.parseInt(PropertyUtil.getProperty(ConfigProperties.ELEMENT_LOAD_TIMEOUT));
         switch (waitStrategy) {
-            case CLICKABLE:
+            case CLICKABLE, ENABLED:
                 return new WebDriverWait(ThreadLocalDriver.getDriver(), waitTimeOut)
                         .until(ExpectedConditions.elementToBeClickable(by));
             case VISIBLE:

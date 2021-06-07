@@ -1,7 +1,7 @@
 package utils;
 
-import constants.Constants;
-import enums.Config;
+import constants.WAFConstants;
+import enums.ConfigProperties;
 import exceptions.PropertyReaderException;
 
 import java.io.FileInputStream;
@@ -19,11 +19,9 @@ public final class PropertyUtil {
     }
 
     private static void readConfig() {
-        String configFilePath = Constants.getConfigFilePath();
-        FileInputStream fis;
-        Properties properties = new Properties();
-        try {
-            fis = new FileInputStream(configFilePath);
+        String configFilePath = WAFConstants.getConfigFilePath();
+        var properties = new Properties();
+        try (FileInputStream fis = new FileInputStream(configFilePath)) {
             properties.load(fis);
             for (String key : properties.stringPropertyNames()) {
                 PROPERTY_MAP.put(key, properties.getProperty(key).trim());
@@ -35,7 +33,7 @@ public final class PropertyUtil {
         }
     }
 
-    public static String getConfig(Config key) {
+    public static String getProperty(ConfigProperties key) {
         if (PROPERTY_MAP.size() < 1) {
             readConfig();
         }
@@ -45,5 +43,17 @@ public final class PropertyUtil {
             throw new PropertyReaderException("Key {" + key + "} does not exist in {config.properties} file. Please check!");
         }
         return PROPERTY_MAP.get(key.getConfig());
+    }
+
+    public static void setProperty(ConfigProperties key, String value) {
+        if (PROPERTY_MAP.size() < 1) {
+            readConfig();
+        }
+        if ((null == key.getConfig()) ||
+                (null == (PROPERTY_MAP.get(key.getConfig()))) ||
+                (PROPERTY_MAP.get(key.getConfig()).isEmpty())) {
+            throw new PropertyReaderException("Key {" + key + "} does not exist in {config.properties} file. Please check!");
+        }
+        PROPERTY_MAP.put(key.getConfig(), value);
     }
 }

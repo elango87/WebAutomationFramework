@@ -7,11 +7,11 @@ import utils.XPathUtil;
 
 public final class HerokuHomePage extends BasePage {
 
-    private static final String linkText = "//a[text()='%s']";
+    private static final String linkNavigationText = "//a[text()='%s']";
 
-    public void clickOnLink(HomePageLinks links) {
+    public void openLink(HomePageLinks links) {
         String homePageLinkText = links.getLink();
-        By xpath = XPathUtil.getXPath(linkText, homePageLinkText);
+        By xpath = XPathUtil.getXPath(linkNavigationText, homePageLinkText);
         click(xpath, WaitStrategy.CLICKABLE, homePageLinkText);
     }
 
