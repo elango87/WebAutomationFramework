@@ -1,18 +1,23 @@
 package extent;
 
+import com.aventstack.extentreports.ExtentTest;
+
 public class ThreadLocalExtentReport {
 
-    private static ThreadLocal<ExtentManager> threadLocalExtentManager = new ThreadLocal<>();
+    private static ThreadLocal<ExtentTest> threadLocalExtentTest = new ThreadLocal<>();
 
-    public static ExtentManager getExtent() {
-        return threadLocalExtentManager.get();
+    private ThreadLocalExtentReport() {
     }
 
-    private static void setExtent(ExtentManager manager) {
-        threadLocalExtentManager.set(manager);
+    public static ExtentTest getExtentTest() {
+        return threadLocalExtentTest.get();
     }
 
-    private static void unload() {
-        threadLocalExtentManager.remove();
+    public static void setExtentTest(ExtentTest extentTest) {
+        threadLocalExtentTest.set(extentTest);
+    }
+
+    public static void unload() {
+        threadLocalExtentTest.remove();
     }
 }

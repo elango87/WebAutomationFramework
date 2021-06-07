@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="Parallel Tests" data-provider-thread-count="2">
     <listeners>
         <listener class-name="listeners.AnnotationTransformer"></listener>
         <listener class-name="listeners.TestNGListener"></listener>
     </listeners>
-    <parameter name="browser" value="chrome"/>
-    <!--<test name="HomePageTest" parallel="methods" thread-count="2">-->
-    <test name="HomePageTest">
+    <parameter name="browser" value="firefox"/>
+    <test name="Parallel Test" parallel="methods" thread-count="2">
         <classes>
-            <class name="heroku.HomePageTest"></class>
+            <class name="heroku.BrokenImagesTest"></class>
+            <class name="heroku.CheckboxesTest"/>
         </classes>
     </test>
 </suite>

@@ -1,6 +1,6 @@
 package driver;
 
-import enums.Config;
+import enums.ConfigProperties;
 import exceptions.UnsupportedBrowserException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
@@ -20,8 +20,8 @@ public final class DriverManager {
     }
 
     public static void initDriver() {
-        String browser = PropertyUtil.getConfig(Config.BROWSER);
-        var isHeadless = Boolean.parseBoolean(PropertyUtil.getConfig(Config.BROWSER_HEADLESS));
+        String browser = PropertyUtil.getProperty(ConfigProperties.BROWSER);
+        var isHeadless = Boolean.parseBoolean(PropertyUtil.getProperty(ConfigProperties.BROWSER_HEADLESS));
 
         if (browser.equals("chrome")) {
             initChromeDriver(isHeadless);
@@ -39,8 +39,8 @@ public final class DriverManager {
     }
 
     private static void driverCommonConfig() {
-        var pageLoadTimeOut = Integer.parseInt(PropertyUtil.getConfig(Config.PAGE_LOAD_TIMEOUT));
-        String appUrl = PropertyUtil.getConfig(Config.URL);
+        var pageLoadTimeOut = Integer.parseInt(PropertyUtil.getProperty(ConfigProperties.PAGE_LOAD_TIMEOUT));
+        String appUrl = PropertyUtil.getProperty(ConfigProperties.URL);
 
         ThreadLocalDriver.getDriver().manage().window().maximize();
         ThreadLocalDriver.getDriver().manage().timeouts().pageLoadTimeout(pageLoadTimeOut, TimeUnit.SECONDS);

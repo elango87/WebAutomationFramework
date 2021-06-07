@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="Package Suite">
     <listeners>
         <listener class-name="listeners.AnnotationTransformer"></listener>
         <listener class-name="listeners.TestNGListener"></listener>
     </listeners>
     <parameter name="browser" value="chrome"/>
-    <!--<test name="HomePageTest" parallel="methods" thread-count="2">-->
-    <test name="HomePageTest">
-        <classes>
-            <class name="heroku.HomePageTest"></class>
-        </classes>
+    <!--<test name="Package Test" parallel="methods" thread-count="2">-->
+    <test name="Package Test">
+        <packages>
+            <package name="heroku"></package>
+        </packages>
     </test>
 </suite>
