@@ -13,9 +13,9 @@ import utils.PropertyUtil;
 public class BaseTest {
 
     @BeforeMethod
-    @Parameters({"browser"})
-    public void setUp(String browser) {
-        PropertyUtil.setProperty(ConfigProperties.BROWSER, browser);
+    @Parameters({"browserName"})
+    public void setUp(String browserName) {
+        PropertyUtil.setProperty(ConfigProperties.BROWSER, browserName);
         DriverManager.initDriver();
     }
 
