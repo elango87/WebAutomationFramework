@@ -44,7 +44,7 @@
                 <configuration>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
                     <parallel>methods</parallel>
-                    <threadCount>5</threadCount>
+                    <threadCount>2</threadCount>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
                         <browserName>${browserName}</browserName>
